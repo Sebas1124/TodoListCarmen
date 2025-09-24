@@ -1,13 +1,16 @@
 
 
-export const InputComponent = ({ placeholder, type, value, onChange, name }) => {
+export const InputComponent = ({ placeholder, type, value, onChange, name, style }) => {
   return (
-    <input 
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      name={name}
-    />
+    <>
+      <input 
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        style={style}
+        onChange={onChange}
+        name={name}
+      />
+    </>
   )
 }

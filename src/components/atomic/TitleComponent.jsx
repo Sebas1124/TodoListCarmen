@@ -1,6 +1,6 @@
 
-export const TitleComponent = ({ value }) => {
+export const TitleComponent = ({ value, style }) => {
   return (
-    <h3>{value}</h3>
+    <h3 style={style}>{value}</h3>
   )
 }

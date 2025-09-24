@@ -80,7 +80,7 @@ export const FormComponent = ({ setTasks }) => {
 
 
   return (
-    <form onSubmit={submitForm}>
+    <form onSubmit={submitForm} className="form-content">
 
         <InputComponent
             type={"text"}
@@ -97,30 +97,48 @@ export const FormComponent = ({ setTasks }) => {
             name={"description"}
             onChange={handleChange}
         />
-        <InputComponent
-            type={"date"}
-            placeholder={"Ingresar fecha de inicio"}
-            value={form.fechaInicio}
-            name={"fechaInicio"}
-            onChange={handleChange}
-        />
-        <InputComponent
-            type={"date"}
-            placeholder={"Ingresar fecha de fin"}
-            value={form.fechaFin}
-            name={"fechaFin"}
-            onChange={handleChange}
-        />
 
-        <SelectComponent
-            form={form}
-            setValue={setForm}
-        />
+        <div className="date-inputs">
+            <InputComponent
+                type={"date"}
+                placeholder={"Ingresar fecha de inicio"}
+                value={form.fechaInicio}
+                name={"fechaInicio"}
+                onChange={handleChange}
+                style={{
+                    flex: 1
+                }}
+            />
+            <InputComponent
+                type={"date"}
+                placeholder={"Ingresar fecha de fin"}
+                value={form.fechaFin}
+                name={"fechaFin"}
+                onChange={handleChange}
+                style={{
+                    flex: 1
+                }}
+            />
+        </div>
 
-        <ButtonComponent
-            label={"Guardar"}
-            type={"submit"}
-        />
+        <div>
+            <SelectComponent
+                form={form}
+                setValue={setForm}
+                style={{
+                    width: "48%",
+                }}
+            />
+
+            <ButtonComponent
+                label={"Guardar"}
+                type={"submit"}
+                style={{
+                    width: "30%",
+                }}
+            />
+        </div>
+
 
         {
             errorMessage && (

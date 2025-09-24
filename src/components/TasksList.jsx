@@ -5,13 +5,13 @@ export const TasksList = ({ tasks }) => {
     <ul>
         {tasks.map((task, index) => (
             <TaskComponent
-                key={index}
-                title={task.title}
-                descripcion={task.description}
-                fechaI={task.fechaInicio}
-                fechaF={task.fechaFin}
-                prioridad={task.prioridad}
-                completada={task.completada}
+              key={index}
+              title={task.title}
+              descripcion={task.description}
+              fechaI={task.fechaInicio}
+              fechaF={task.fechaFin}
+              prioridad={task.prioridad}
+              completada={task.completada}
             />
         ))}
     </ul>

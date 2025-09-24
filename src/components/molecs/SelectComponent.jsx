@@ -1,7 +1,7 @@
 import { OptionComponent } from "../atomic/OptionComponent"
 
 
-export const SelectComponent = ({ form, setValue }) => {
+export const SelectComponent = ({ form, setValue, style }) => {
 
   const handleChange = (event) => {
 
@@ -17,6 +17,7 @@ export const SelectComponent = ({ form, setValue }) => {
     <select
       defaultValue={""}
       onChange={handleChange}
+      style={style}
     >
       <OptionComponent value="" label="-- Seleccione una prioridad --" />
       <OptionComponent value="baja" label="Baja" />
