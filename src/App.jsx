@@ -89,6 +89,8 @@ export const App = () => {
       <ModalComponent 
         showModal={showModal}
         setShowModal={setShowModal}
+        setTaskList={setTasks}
+        taskList={tasks}
       />
     </>
   )

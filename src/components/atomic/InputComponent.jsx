@@ -1,6 +1,6 @@
 
 
-export const InputComponent = ({ placeholder, type, value, onChange, name, style }) => {
+export const InputComponent = ({ placeholder, type, value, onChange, name, style, checked }) => {
   return (
     <>
       <input 
@@ -10,6 +10,7 @@ export const InputComponent = ({ placeholder, type, value, onChange, name, style
         style={style}
         onChange={onChange}
         name={name}
+        checked={checked}
       />
     </>
   )

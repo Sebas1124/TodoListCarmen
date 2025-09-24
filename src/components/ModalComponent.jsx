@@ -1,9 +1,40 @@
+import { useState } from "react";
 import { ButtonComponent } from "./atomic/ButtonComponent";
 import { InputComponent } from "./atomic/InputComponent";
 
-export const ModalComponent = ({ showModal, setShowModal }) => {
+export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList }) => {
 
     if (!showModal) return null;
+
+    const [filters, setFilters] = useState({
+        alta: false,
+        media: false,
+        baja: false,
+        fechaInicio: null,
+        fechaFin: null,
+        completadas: false
+    })
+
+    const handleChangeCompleted = (e) => {
+
+        setFilters({
+            ...filters,
+            completadas: !filters.completadas
+        })
+    }
+
+    const handleApplyFilters = () => {
+        
+        let filteredTasks = [...taskList];
+
+        // Filtrar por completadas.
+        if (filters.completadas){
+            filteredTasks = filteredTasks.filter(task => task.completada === true);
+        }
+
+        setTaskList(filteredTasks);
+        setShowModal(false);
+    }
 
   return (
     <div className="modal-background">
@@ -79,6 +110,9 @@ export const ModalComponent = ({ showModal, setShowModal }) => {
                     type={"checkbox"}
                     label={"Completadas"}
                     name={"completadas"}
+                    onChange={handleChangeCompleted}
+                    checked={filters.completadas}
+
                 />
                 <span>Completadas</span>
             </div>
@@ -86,6 +120,7 @@ export const ModalComponent = ({ showModal, setShowModal }) => {
             {/* Boton para aplicar filtros */}
             <ButtonComponent
                 label={"Aplicar Filtros"}
+                onClick={handleApplyFilters}
             />
 
             {/* Resetear filtros */}
