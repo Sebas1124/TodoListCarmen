@@ -66,7 +66,7 @@ export const FormComponent = ({ setTasks }) => {
             completada: false
         }
 
-        setTasks(prev => [...prev, newTask]);
+        setTasks(anterior => [...anterior, newTask]);
 
         setForm({
             title: "",

@@ -36,6 +36,20 @@ export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList 
         setShowModal(false);
     }
 
+    const resetFilters = () => {
+        setFilters({
+            alta: false,
+            media: false,
+            baja: false,
+            fechaInicio: null,
+            fechaFin: null,
+            completadas: false
+        })
+
+        setTaskList(taskList);
+        setShowModal(false);
+    }
+
   return (
     <div className="modal-background">
         <div className="modal-content">
@@ -126,6 +140,7 @@ export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList 
             {/* Resetear filtros */}
             <ButtonComponent
                 label={"Resetear Filtros"}
+                onClick={resetFilters}
                 style={{
                     backgroundColor: "#f44336",
                 }}

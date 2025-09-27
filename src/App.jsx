@@ -8,33 +8,6 @@ import { ModalComponent } from "./components/ModalComponent";
 export const App = () => {
 
   const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Tarea 1",
-      description: "Descripcion tarea 1",
-      fechaInicio: new Date().toLocaleDateString(),
-      fechaFin: new Date("2023-12-31").toLocaleDateString(),
-      prioridad: "alta",
-      completada: false
-    },
-    {
-      id: 2,
-      title: "Tarea 2",
-      description: "Descripcion tarea 2",
-      fechaInicio: new Date().toLocaleDateString(),
-      fechaFin: new Date("2023-12-31").toLocaleDateString(),
-      prioridad: "media",
-      completada: true
-    },
-    {
-      id: 3,
-      title: "Tarea 3",
-      description: "Descripcion tarea 3",
-      fechaInicio: new Date().toLocaleDateString(),
-      fechaFin: new Date("2023-12-31").toLocaleDateString(),
-      prioridad: "baja",
-      completada: false
-    }
   ]);
 
   const [showModal, setShowModal] = useState(false);
