@@ -224,3 +224,41 @@ input[type="checkbox"] {
   flex-direction: column;
   gap: 10px;
 }
+
+/* pantallas mediana */
+@media (min-width: 600px) {
+
+  .form-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .form-content input, 
+  .form-content select, 
+  .form-content button {
+    width: 300px;
+  }
+
+  .date-inputs {
+    width: 500px;
+  }
+
+  .filter-tasks {
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+/* pantalla grande */
+@media (min-width: 900px) {
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+}

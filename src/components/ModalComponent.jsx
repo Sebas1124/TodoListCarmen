@@ -32,6 +32,40 @@ export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList 
             filteredTasks = filteredTasks.filter(task => task.completada === true);
         }
 
+        if (filters.alta || filters.media || filters.baja){
+            filteredTasks = filteredTasks.filter(task => {
+                if (filters.alta && task.prioridad === "alta") return true;
+                if (filters.media && task.prioridad === "media") return true;
+                if (filters.baja && task.prioridad === "baja") return true;
+                return false;
+            })
+
+            // filtrar por si seleccionan alta y media, pero no baja
+            if (filters.alta && filters.media && !filters.baja) {
+                filteredTasks = filteredTasks.filter(task => task.prioridad !== "baja");
+            }
+
+            // filtrar por si seleccionan alta y baja, pero no media
+            if (filters.alta && !filters.media && filters.baja) {
+                filteredTasks = filteredTasks.filter(task => task.prioridad !== "media");
+            }
+
+            // filtrar por si seleccionan media y baja, pero no alta
+            if (!filters.alta && filters.media && filters.baja) {
+                filteredTasks = filteredTasks.filter(task => task.prioridad !== "alta");
+            }
+
+        }
+
+        // filtrar por rango de fechas
+        if (filters.fechaInicio){
+            filteredTasks = filteredTasks.filter(task => new Date(task.fechaInicio) >= new Date(filters.fechaInicio))
+        }
+
+        if (filters.fechaFin){
+            filteredTasks = filteredTasks.filter(task => new Date(task.fechaFin) <= new Date(filters.fechaFin))
+        }
+
         setTaskList(filteredTasks);
         setShowModal(false);
     }
@@ -46,8 +80,30 @@ export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList 
             completadas: false
         })
 
-        setTaskList(taskList);
+        const tasksFromStorage = localStorage.getItem("tasks");
+
+        if (tasksFromStorage){
+            const parsedTasks = JSON.parse(tasksFromStorage);
+            setTaskList(parsedTasks);
+        }
+
         setShowModal(false);
+    }
+
+    const onChangePriority = (e) => {
+        const { name, checked } = e.target;
+        setFilters({
+            ...filters,
+            [name]: checked
+        })
+    }
+
+    const onChangeDate = (e) => {
+        const { name, value } = e.target;
+        setFilters({
+            ...filters,
+            [name]: value
+        })
     }
 
   return (
@@ -74,6 +130,8 @@ export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList 
                         type={"checkbox"}
                         label={"Alta"}
                         name={"alta"}
+                        checked={filters.alta}
+                        onChange={onChangePriority}
                     />
                     <span>Alta</span>
                 </div>
@@ -83,6 +141,8 @@ export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList 
                         type={"checkbox"}
                         label={"Media"}
                         name={"media"}
+                        checked={filters.media}
+                        onChange={onChangePriority}
                     />
                     <span>Media</span>
                 </div>
@@ -92,6 +152,8 @@ export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList 
                         type={"checkbox"}
                         label={"Baja"}
                         name={"baja"}
+                        checked={filters.baja}
+                        onChange={onChangePriority}
                     />
                     <span>Baja</span>
                 </div>
@@ -107,6 +169,9 @@ export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList 
                     style={{
                         flex: 1
                     }}
+                    value={filters.fechaInicio}
+                    onChange={onChangeDate}
+
                 />
 
                 <InputComponent
@@ -115,6 +180,8 @@ export const ModalComponent = ({ showModal, setShowModal, taskList, setTaskList 
                     style={{
                         flex: 1
                     }}
+                    value={filters.fechaFin}
+                    onChange={onChangeDate}
                 />
             </div>
 
