@@ -3,7 +3,17 @@ import { ButtonComponent } from "../atomic/ButtonComponent"
 import { PComponent } from "../atomic/PComponent"
 import { TitleComponent } from "../atomic/TitleComponent"
 
-export const TaskComponent = ({ title, descripcion, fechaI, fechaF, prioridad, completada }) => {
+export const TaskComponent = ({ 
+    id, 
+    title, 
+    descripcion, 
+    fechaI, 
+    fechaF, 
+    prioridad, 
+    completada, 
+    handleCompleteTask,
+    handleDeleteTask
+}) => {
 
     const [showOptions, setShowOptions] = useState(false);
 
@@ -58,7 +68,7 @@ export const TaskComponent = ({ title, descripcion, fechaI, fechaF, prioridad, c
 
                                 <ButtonComponent
                                     label={completada ? "Desmarcar" : "Completar"}
-                                    onClick={() => {}}
+                                    onClick={() => handleCompleteTask(id)}
                                     style={{
                                         backgroundColor: 'transparent',
                                         fontSize: '14px',
@@ -78,7 +88,7 @@ export const TaskComponent = ({ title, descripcion, fechaI, fechaF, prioridad, c
 
                                 <ButtonComponent
                                     label={"Eliminar"}
-                                    onClick={() => {}}
+                                    onClick={() => handleDeleteTask(id)}
                                     style={{
                                         backgroundColor: 'transparent',
                                         fontSize: '14px',

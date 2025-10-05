@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FormComponent } from "./components/FormComponent"
 import { TasksList } from "./components/TasksList";
 import { ButtonComponent } from "./components/atomic/ButtonComponent";
@@ -11,6 +11,18 @@ export const App = () => {
   ]);
 
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    
+    const taskFromStorage = localStorage.getItem("tasks");
+
+    if (taskFromStorage){
+      const parsedTasks = JSON.parse(taskFromStorage);
+      setTasks(parsedTasks);
+    }
+
+  }, [])
+  
 
   return (
     <>
@@ -28,6 +40,7 @@ export const App = () => {
 
         <FormComponent
           setTasks={setTasks}
+          tasks={tasks}
         />
 
         <hr/>
@@ -55,7 +68,7 @@ export const App = () => {
 
         </div>
 
-        <TasksList tasks={tasks}/>
+        <TasksList tasks={tasks} setTasks={setTasks} />
         
       </main>
 

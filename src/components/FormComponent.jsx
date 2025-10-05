@@ -2,8 +2,9 @@ import { useState } from "react";
 import { InputComponent } from "./atomic/InputComponent"
 import { SelectComponent } from "./molecs/SelectComponent";
 import { ButtonComponent } from "./atomic/ButtonComponent";
+import { v4 as uuidv4 } from 'uuid';
 
-export const FormComponent = ({ setTasks }) => {
+export const FormComponent = ({ tasks, setTasks }) => {
 
     const [form, setForm] = useState({
         title: "",
@@ -58,6 +59,7 @@ export const FormComponent = ({ setTasks }) => {
         if (errorMessage.length > 0) return;
 
         const newTask = {
+            id: uuidv4(),
             title,
             description,
             fechaInicio,
@@ -76,6 +78,9 @@ export const FormComponent = ({ setTasks }) => {
             prioridad: "",
             completada: false
         })
+
+        localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]));
+
     }
 
 
